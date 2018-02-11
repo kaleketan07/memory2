@@ -1,15 +1,4 @@
 <h1>Memory Game</h1>
 
-<div id="grid">
-  <div class="row">
-  <div class="col">
-    <h1>Hangman Game</h1>
-    <div id="root">
-      <p>React app not loaded...</p>
-    </div>
-  </div>
-  </div>
-</div>
-
-
-
+<h1>Join the Memory Game!</h1>
+<a href="/games/demo ">join</a>

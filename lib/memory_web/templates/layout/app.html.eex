@@ -3,8 +3,12 @@
 <html lang="en">
   <head>
 	<meta charset = "UTF-8">
-        <title>Ketan's Memory Game</title>    
+        <title>Ketan's Memory Game</title>
         <link rel= "stylesheet" type= "text/css" href="/css/app.css"/>
+        <script>
+            window.userToken = "SOMETHING"
+        </script>
+
   </head>
 
   <body>
@@ -18,4 +22,4 @@
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
-~       
+~
