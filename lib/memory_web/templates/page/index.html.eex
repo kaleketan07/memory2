@@ -1,4 +1,16 @@
+
 <h1>Memory Game</h1>
 
 <h1>Join the Memory Game!</h1>
-<a href="/games/demo ">join</a>
+
+<p>Enter the Game name here:</p>
+<p><input type="text" id = "gname"></input></p>
+
+<p><button id = "link" onclick = "visit()">join</button></p>
+
+<script>
+function visit (){
+val = document.getElementById('gname').value
+ location.href = "/games/" + val
+}
+</script>

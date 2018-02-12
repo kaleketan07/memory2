@@ -3,8 +3,8 @@ defmodule Memory.Game do
     newlist = List.duplicate("",16)
     %{
       disp_values: newlist,
-      asso_values: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
-      act_values: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
+      asso_values: ["A", "B", "C", "D", "E", "F", "G", "H", "A", "B", "C", "D", "E", "F", "G", "H"],
+      act_values: ["A", "B", "C", "D", "E", "F", "G", "H", "A", "B", "C", "D", "E", "F", "G", "H"],
       clicks: 0,
       firstguess: -1,
       secondguess: -1
@@ -65,7 +65,7 @@ defmodule Memory.Game do
             secondguess: sg
           }
         else
-          # settimeout for 1 seconds
+
           %{
             disp_values: dispvalues,
             asso_values: avalues,
