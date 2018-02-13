@@ -44,52 +44,17 @@ defmodule Memory.Game do
     else
       if sg == -1 and index != fg and val != "DONE" do
         sg = index
-        {_, val} = Enum.fetch(avalues, index)
         dispvalues = List.replace_at(dvalues, index, val)
-        {_, fgaval} = Enum.fetch(avalues, fg)
-        {_, sgaval} = Enum.fetch(avalues, sg)
+
         # irrespective of the following code the state should be sent to the client
-        if fgaval == sgaval do
-          dispvalues = List.replace_at(dispvalues, fg, "DONE")
-          dispvalues = List.replace_at(dispvalues, sg, "DONE")
-          avalues = List.replace_at(avalues, fg, "DONE")
-          avalues = List.replace_at(avalues, sg, "DONE")
-          fg = -1
-          sg = -1
-          %{
-            disp_values: dispvalues,
-            asso_values: avalues ,
-            act_values: game.act_values,
-            clicks: game.clicks + 1,
-            firstguess: fg,
-            secondguess: sg
-          }
-        else
-
-          %{
-            disp_values: dispvalues,
-            asso_values: avalues,
-            act_values: game.act_values,
-            clicks: game.clicks + 1,
-            firstguess: fg,
-            secondguess: sg
-          }
-          :timer.sleep(1000)
-          dispvalues = List.replace_at(dispvalues, fg, "")
-          dispvalues = List.replace_at(dispvalues, sg, "")
-          fg = -1
-          sg = -1
-          %{
-            disp_values: dispvalues,
-            asso_values: avalues,
-            act_values: game.act_values,
-            clicks: game.clicks,
-            firstguess: fg,
-            secondguess: sg
-          }
-
-
-        end
+        %{
+          disp_values: dispvalues,
+          asso_values: avalues,
+          act_values: game.act_values,
+          clicks: game.clicks + 1,
+          firstguess: fg,
+          secondguess: sg
+        }
       else
         %{
           disp_values: dvalues,
@@ -102,8 +67,65 @@ defmodule Memory.Game do
       end
 
     end
+
   # set the values of the field and return a map that's like the game
   end
+
+  def checkmatch(game) do
+    dvalues = game.disp_values
+    avalues = game.asso_values
+    fg = game.firstguess
+    sg = game.secondguess
+    {_, fgaval} = Enum.fetch(avalues, fg)
+    {_, sgaval} = Enum.fetch(avalues, sg)
+    if sg != -1 do
+      if fgaval == sgaval do
+        dispvalues = List.replace_at(dvalues, fg, "DONE")
+        dispvalues = List.replace_at(dispvalues, sg, "DONE")
+        avalues = List.replace_at(avalues, fg, "DONE")
+        avalues = List.replace_at(avalues, sg, "DONE")
+        fg = -1
+        sg = -1
+        %{
+          disp_values: dispvalues,
+          asso_values: avalues ,
+          act_values: game.act_values,
+          clicks: game.clicks + 1,
+          firstguess: fg,
+          secondguess: sg
+        }
+      else
+
+        :timer.sleep(1000)
+        dispvalues = List.replace_at(dvalues, fg, "")
+        dispvalues = List.replace_at(dispvalues, sg, "")
+        fg = -1
+        sg = -1
+        %{
+          disp_values: dispvalues,
+          asso_values: avalues,
+          act_values: game.act_values,
+          clicks: game.clicks,
+          firstguess: fg,
+          secondguess: sg
+        }
+
+
+      end
+    else
+      %{
+        disp_values: game.disp_values,
+        asso_values: game.asso_values,
+        act_values: game.act_values,
+        clicks: game.clicks,
+        firstguess: game.firstguess,
+        secondguess: game.secondguess
+      }
+
+    end
+  end
+
+
   ## handle click ends here
   def restart(game) do
     dispvalues = List.duplicate("",16)

@@ -25,14 +25,24 @@ export default function game_demo(root, channel) {
 class Tile extends React.Component {
 
       render(){
-		return(<button type= "button" className="btn btn-outline-primary"  style= {{width : '100%', height : '150px'}} onClick = {() => this.props.onClick()}>{this.props.val}</button>);
+				return(<button type= "button"
+											 className="btn btn-outline-primary"
+											 style= {{width : '100%', height : '150px'}}
+											 onClick = {() => this.props.onClick()}>{this.props.val}
+							 </button>);
       }
 }
 
 class RestartButton extends React.Component {
 
       render(){
-		return(<button type= "button" className="btn btn-outline-primary"  style= {{width : '150px', height : '30px'}} onClick = {() => this.props.onClick()}>Restart Game </button>);
+				return(<button type= "button"
+				  						 className="btn btn-outline-primary"
+											 style= {{width : '150px', height : '30px'}}
+											 onClick = {() => this.props.onClick()}>
+							  Restart Game
+
+							 </button>);
       }
 }
 
@@ -56,24 +66,27 @@ class Grid extends React.Component {
       }
 
 			viewReceived(msg){
-				console.log('channel joined:'+ gameName)
 				console.log('view received', msg.view);
 				this.setState(msg.view)
 			}
 
       handleClick(index){
-					this.channel.push("handlechoice", { index: index })
-					            .receive("ok", this.viewReceived.bind(this));
+				this.channel.push("handlechoice", { index: index })
+				            .receive("ok", this.viewReceived.bind(this));
+				this.channel.push("checkmatch")
+										.receive("ok", this.viewReceived.bind(this));
+			  this.channel.push("checkWinner")
+										.receive("ok", this.declareWinner.bind(this));
       }
 
 
       makeTile(index) {
-      		 return <Tile val = {this.state.disp_values[index]}
-		 	      onClick = {() => this.handleClick(index)}/>
+      	return <Tile val = {this.state.disp_values[index]}
+		    onClick = {() => this.handleClick(index)}/>
       }
 
       makeRButton(){
-					 return <RestartButton onClick = {() => this.restart()} />
+				return <RestartButton onClick = {() => this.restart()} />
       }
 
 			restart(){
@@ -91,12 +104,12 @@ class Grid extends React.Component {
 				else return (<p></p>);
 			}
 
-      isWinner(){// Use the and map for checking this
-
-				this.channel.push("checkWinner")
-										.receive("ok", this.declareWinner.bind(this));
-
-      }
+      // isWinner(){// Use the and map for checking this
+      //
+			// 	this.channel.push("checkWinner")
+			// 							.receive("ok", this.declareWinner.bind(this));
+      //
+      // }
 
 
 
@@ -133,9 +146,7 @@ class Grid extends React.Component {
 															<p>Number of clicks used : {this.state.clicks}</p>
 															<p>Score : {200 - this.state.clicks}</p>
 												</div>
-												<div>
-															{this.isWinner()}
-												</div>
+												
 												<div>
 															{this.makeRButton()}
 												</div>
