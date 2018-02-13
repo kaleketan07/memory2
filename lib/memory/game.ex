@@ -90,7 +90,7 @@ defmodule Memory.Game do
           disp_values: dispvalues,
           asso_values: avalues ,
           act_values: game.act_values,
-          clicks: game.clicks + 1,
+          clicks: game.clicks,
           firstguess: fg,
           secondguess: sg
         }
