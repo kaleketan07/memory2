@@ -22,4 +22,3 @@
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
-~

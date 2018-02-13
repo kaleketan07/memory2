@@ -4,7 +4,7 @@
 <h1>Join the Memory Game!</h1>
 
 <p>Enter the Game name here:</p>
-<p><input type="text" id = "gname"></input></p>
+<p><input type="text" id = "gname"/></p>
 
 <p><button id = "link" onclick = "visit()">join</button></p>
 

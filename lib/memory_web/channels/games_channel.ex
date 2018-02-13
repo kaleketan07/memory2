@@ -27,6 +27,7 @@ defmodule MemoryWeb.GamesChannel do
   def handle_in("checkmatch", %{}, socket) do
     game0 = socket.assigns[:game]
     game1 = Game.checkmatch(game0)
+    Memory.GameBackup.save(socket.assigns[:name], game1)
     socket = assign(socket, :game, game1)
     {:reply, {:ok, %{ "view" => Game.user_view(game1)}}, socket}
   end
